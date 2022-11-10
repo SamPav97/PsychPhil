@@ -40,6 +40,8 @@ INSTALLED_APPS = [
 
     'PsychPhil_app.common',
     'PsychPhil_app.clients',
+    'PsychPhil_app.therapies',
+    'PsychPhil_app.core',
 ]
 
 MIDDLEWARE = [
