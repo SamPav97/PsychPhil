@@ -1,5 +1,15 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block content %}
+            {# I style it here because when I style from css it won't find the file. Maybe fix this. #}
+        <section class="site-header" style=" background:
+    linear-gradient(rgba(0,0,0,0.3),
+    rgba(0,0,0,0.6)),
+    url({% static '/images/clinic.png'%}) no-repeat center;
+    background-size: cover;">
+            <h1>A Clinic for the Deeper Minded</h1>
+            <button><a href="#">LEARN MORE</a></button>
+        </section>
         <section class="welcome">
             <h2>Welcome to the PsychoPhil Clinic</h2>
             <p>Here we offer therapy for those who seek more than quick fixes. We practce all the legitimate deep therpaies. From Existential Therapy to Psychoanalysis, you name it!</p>

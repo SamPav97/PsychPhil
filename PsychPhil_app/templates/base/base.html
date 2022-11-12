@@ -3,12 +3,11 @@
 <html lang="en">
 
 <head>
-    <script src="https://kit.fontawesome.com/a5dd688fdf.js" crossorigin="anonymous"></script>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Philosophical Therapies</title>
-    <link rel="stylesheet" href="{% static 'css/landingPageStyle.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 
 <body>
@@ -17,15 +16,6 @@
         <section class="navigation">
             <p class="site-title">Psych<span><i class="fa-solid fa-brain"></i>Phil</span></p>
             {% include 'base/partials/nav.html' %}
-        </section>
-        {# I style it here because when I style from css it won't find the file. Maybe fix this. #}
-        <section class="site-header" style=" background:
-    linear-gradient(rgba(0,0,0,0.3),
-    rgba(0,0,0,0.6)),
-    url({% static '/images/clinic.png'%}) no-repeat center;
-    background-size: cover;">
-            <h1>A Clinic for the Deeper Minded</h1>
-            <button>LEARN MORE</button>
         </section>
     </header>
 
