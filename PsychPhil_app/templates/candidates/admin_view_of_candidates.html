@@ -1,0 +1,21 @@
+{% extends 'base/base.html' %}
+{% load placeholders %}
+{% block content %}
+
+    <!-- Start Register Section -->
+    <div class="login-register-div">
+        <div class="login-register-box">
+            <h1>Candidates</h1>
+
+            <!-- Start Register Form -->
+            {% for candidate in candidates %}
+                {{ candidate.user }}
+                <button>a</button>
+            {% endfor %}
+            <!-- End Register Form -->
+
+        </div>
+    </div>
+    <!-- End Register Section -->
+
+{% endblock %}
