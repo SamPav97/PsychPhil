@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% load placeholders %}
+{% load static %}
 {% block content %}
 
     <!-- Start Register Section -->
@@ -10,7 +10,14 @@
             <!-- Start Register Form -->
             {% for candidate in candidates %}
                 {{ candidate.user }}
-                <button>a</button>
+
+                <a href="{% url 'accept candidate' pk=candidate.pk %}">
+                    Accept
+                </a>
+
+                <a href="{% url 'refute candidate' pk=candidate.pk %}">
+                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
+                </a>
             {% endfor %}
             <!-- End Register Form -->
 

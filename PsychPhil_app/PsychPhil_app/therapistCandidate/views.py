@@ -1,14 +1,16 @@
 from django.contrib.admin.views.decorators import staff_member_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.urls import reverse_lazy
 from django.views import generic as views
 
 from PsychPhil_app.accounts.models import AppUser
+from PsychPhil_app.therapistCandidate.mixins import NonTherapistRequiredMixin, ApplicationInProcessMixin
 from PsychPhil_app.therapistCandidate.models import TherapistCand
 
 
-class CandidateView(LoginRequiredMixin, views.CreateView):
+class CandidateView(ApplicationInProcessMixin, NonTherapistRequiredMixin, LoginRequiredMixin, views.CreateView):
     template_name = 'candidates/candidate.html'
     model = TherapistCand
     fields = ('motivation',)
@@ -37,3 +39,26 @@ def acceptance_view(request):
     }
 
     return render(request, 'candidates/admin_view_of_candidates.html', context,)
+
+
+class RefuteCandidate(views.DeleteView):
+    template_name = 'candidates/candidate-refute-page.html'
+    model = TherapistCand
+    success_url = reverse_lazy('acceptance')
+
+
+
+def accept_candidate(request, pk):
+    candidate = TherapistCand.objects \
+            .filter(pk=pk) \
+            .get()
+
+    make_therapist = AppUser.objects \
+        .filter(pk=candidate.user_id) \
+        .get()
+    make_therapist.is_therapist = True
+    make_therapist.save()
+
+    candidate.delete()
+
+    return redirect('acceptance')
