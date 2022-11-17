@@ -1,5 +1,5 @@
 {% extends 'base/base.html' %}
-{% block page_content %}
+{% block content %}
 {% load static  %}
     <!-- Start Profile Details Section -->
     <div class="profile">
@@ -20,12 +20,12 @@
                     {% if is_owner %}
                     <!-- IF the viewer is the owner of the profile -->
                     <!-- Link to Edit Profile Page -->
-                    <a href="{% url 'edit user' pk=object.pk %}">
-                        <img class="edit-img" src="{% static 'images/edit-pen-icon-6.jpg' %}" alt="edit button">
+                    <a href="{% url 'update user' pk=request.user.pk %}">
+                        Update Prof
                     </a>
 
                     <!-- Link to Delete Profile Page -->
-                    <a href="{% url 'delete user' pk=object.pk %}">
+                    <a href="#">
                         <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
                     </a>
                     <!-- End IF the viewer is the owner of the profile -->
@@ -34,15 +34,18 @@
                 <div class="data">
 
                     <!-- Total Number of Photos by the User -->
-                    <span>4</span>
-                    <p>photos</p>
+                    {% if is_therapist %}:
+                        This user is a therapist
+                        {% else %}
+                        Not therapist
+                    {% endif %}
 
                     <!-- Total Number of Pets owned by the User -->
-                    <span>{{ pets_count }}</span>
+                    <span></span>
                     <p>pets</p>
 
                     <!-- Total Number of Likes for the User -->
-                    <span>{{ photos_count }}</span>
+                    <span></span>
                     <p>likes</p>
                 </div>
 
@@ -65,23 +68,23 @@
         <!-- Start Pets Data Section -->
         <div class="pets">
             <div class="statuses">
-                {% for pet in object.pet_set.all %}
-                <!-- Start 1st Pet Details Page -->
-                <!-- Link to First Pet Details Page -->
-                <a href="{% url 'details pet' pet_slug=pet.slug username=object.username %}">
-                    <div class="head-pet">
-                        <div class="status">
-                            <div class="image">
-                                <!-- Pet Image -->
-                                <img src="{{ pet.personal_photo }}"
-                                     alt="image of {{ pet.name }}">
-                            </div>
-                        </div>
-                        <!-- Pet Name -->
-                        <p>{{ pet.name }}</p>
-                    </div>
-                </a>
-                {% endfor %}
+{#                {% for pet in object.pet_set.all %}#}
+{#                <!-- Start 1st Pet Details Page -->#}
+{#                <!-- Link to First Pet Details Page -->#}
+{#                <a href="#">#}
+{#                    <div class="head-pet">#}
+{#                        <div class="status">#}
+{#                            <div class="image">#}
+{#                                <!-- Pet Image -->#}
+{#                                <img src="{{ pet.personal_photo }}"#}
+{#                                     alt="image of {{ pet.name }}">#}
+{#                            </div>#}
+{#                        </div>#}
+{#                        <!-- Pet Name -->#}
+{#                        <p></p>#}
+{#                    </div>#}
+{#                </a>#}
+{#                {% endfor %}#}
                 <!-- End 1st Pet Details Page -->
             </div>
         </div>

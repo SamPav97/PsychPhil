@@ -22,6 +22,7 @@ class AppUser(auth_models.AbstractUser):
 
     first_name = models.CharField(
         max_length=MAX_LEN_FIRST_NAME,
+        blank=True,
         validators=(
             validators.MinLengthValidator(MIN_LEN_FIRST_NAME),
             validate_only_letters,
@@ -30,6 +31,7 @@ class AppUser(auth_models.AbstractUser):
 
     last_name = models.CharField(
         max_length=MAX_LEN_LAST_NAME,
+        blank=True,
         validators=(
             validators.MinLengthValidator(MIN_LEN_LAST_NAME),
             validate_only_letters,
@@ -43,6 +45,7 @@ class AppUser(auth_models.AbstractUser):
     gender = models.CharField(
         choices=Gender.choices(),
         max_length=Gender.max_len(),
+        blank=True,
     )
 
     is_therapist = models.BooleanField(

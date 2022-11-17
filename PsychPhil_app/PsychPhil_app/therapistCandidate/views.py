@@ -47,7 +47,6 @@ class RefuteCandidate(views.DeleteView):
     success_url = reverse_lazy('acceptance')
 
 
-
 def accept_candidate(request, pk):
     candidate = TherapistCand.objects \
             .filter(pk=pk) \
