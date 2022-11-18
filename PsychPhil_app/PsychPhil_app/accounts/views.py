@@ -1,10 +1,12 @@
-from django.contrib.auth import views as auth_views, get_user_model
+from django.contrib.auth import views as auth_views, get_user_model, login
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from PsychPhil_app.accounts.forms import UserCreateForm
+from PsychPhil_app.accounts.forms import SignUpForm
+from PsychPhil_app.accounts.models import Profile
 
 UserModel = get_user_model()
+
 
 class SignInView(auth_views.LoginView):
     template_name = 'accounts/login-page.html'
@@ -12,8 +14,16 @@ class SignInView(auth_views.LoginView):
 
 class SignUpView(views.CreateView):
     template_name = 'accounts/register-page.html'
-    form_class = UserCreateForm
+    form_class = SignUpForm
+
     success_url = reverse_lazy('index')
+
+    # Signs the user in, after successful sign up
+    def form_valid(self, form):
+        result = super().form_valid(form)
+
+        login(self.request, self.object)
+        return result
 
 
 class SignOutView(auth_views.LogoutView):
@@ -35,11 +45,17 @@ class UserDetailsView(views.DetailView):
 
 class UserUpdateView(views.UpdateView):
     template_name = 'accounts/profile-edit-page.html'
-    model = UserModel
+    model = Profile
 
-    fields = ('first_name', 'last_name', 'gender', 'email')
+    fields = ('first_name', 'last_name', 'gender', 'age')
 
     def get_success_url(self):
         return reverse_lazy('details user', kwargs={
             'pk': self.request.user.pk,
         })
+
+
+class UserDeleteView(views.DeleteView):
+    template_name = 'accounts/profile-delete-page.html'
+    model = UserModel
+    success_url = reverse_lazy('index')

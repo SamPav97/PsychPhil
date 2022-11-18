@@ -1,7 +1,7 @@
 {% extends 'base/base.html' %}
 {% load static %}
+{% block content %}
 
-{% block page_content %}
     <!-- Start Delete Profile Section -->
         <div class="delete-profile">
             <h1>
@@ -9,6 +9,7 @@
             </h1>
             <div class="sure-buttons">
                 <form method="post" action="{% url 'delete user' pk=request.user.pk %}">
+                    {{ form }}
                 <!-- Yes (Delete Profile) Button -->
                     <button>Yes</button>
                     {% csrf_token %}

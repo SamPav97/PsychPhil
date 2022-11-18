@@ -1,6 +1,7 @@
 from django.urls import path, include
 
-from PsychPhil_app.accounts.views import SignInView, SignUpView, SignOutView, UserDetailsView, UserUpdateView
+from PsychPhil_app.accounts.views import SignInView, SignUpView, SignOutView, UserDetailsView, UserUpdateView, \
+    UserDeleteView
 
 urlpatterns = (
     path('login/', SignInView.as_view(), name='login user'),
@@ -9,5 +10,8 @@ urlpatterns = (
     path('details/<int:pk>/', include([
         path('', UserDetailsView.as_view(), name='details user'),
         path('update/', UserUpdateView.as_view(), name='update user'),
+        path('delete/', UserDeleteView.as_view(), name='delete user'),
     ])),
 )
+
+from .signals import *

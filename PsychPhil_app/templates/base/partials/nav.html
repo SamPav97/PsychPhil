@@ -14,7 +14,7 @@
                 <ul class="nav-group">
                     <li class="nav-item">
                         <!-- Link to Add Pet Page -->
-                        <a href="#}">
+                        <a href="#">
                             <i>Add Pet</i>
                         </a>
                     </li>
@@ -39,13 +39,13 @@
                     {% else %}
                         <li class="nav-item">
                             <!-- Link to Profile Page -->
-                            <a href="#">
+                            <a href="{% url 'register user' %}">
                                 <i>Sign up</i>
                             </a>
                         </li>
                         <li class="nav-item">
                             <!-- Link to Profile Page -->
-                            <a href="#">
+                            <a href="{% url 'login user' %}">
                                 <i>Sign in</i>
                             </a>
                         </li>

@@ -25,8 +25,8 @@
                     </a>
 
                     <!-- Link to Delete Profile Page -->
-                    <a href="#">
-                        <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
+                    <a href="{% url 'delete user' pk=request.user.pk %}">
+                        Remove User
                     </a>
                     <!-- End IF the viewer is the owner of the profile -->
                     {% endif %}

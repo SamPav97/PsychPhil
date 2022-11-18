@@ -25,8 +25,8 @@ class CandidateView(ApplicationInProcessMixin, NonTherapistRequiredMixin, LoginR
         self.object.save()
         return HttpResponseRedirect(self.get_success_url())
 
-# TODO now you have ur sep model for candidate users. once they apply you need a special view where only the super user can see and approve so then once approved the account db needs to become staff
-# TODO now whats lefti s to make the applicants is therapist change to true in the account and remove them from applicant list.
+# now you have ur sep model for candidate users. once they apply you need a special view where only the super user can see and approve so then once approved the account db needs to become staff
+# now whats lefti s to make the applicants is therapist change to true in the account and remove them from applicant list.
 
 # Needs to be function view because I want to use the decorator.
 @staff_member_required
