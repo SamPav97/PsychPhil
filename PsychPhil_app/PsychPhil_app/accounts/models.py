@@ -28,6 +28,10 @@ class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
         blank=False,
     )
 
+    date_joined = models.DateTimeField(
+        auto_now_add=True,
+    )
+
     is_therapist = models.BooleanField(
         default=False,
     )
