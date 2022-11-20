@@ -1,4 +1,5 @@
-
+from django.conf import settings
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
@@ -9,3 +10,9 @@ urlpatterns = [
     path('accounts/', include('PsychPhil_app.accounts.urls')),
     path('candidates/', include('PsychPhil_app.therapistCandidate.urls')),
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# TODO i should create the view that accepts the file upload and check that it works.
