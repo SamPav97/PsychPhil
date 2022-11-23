@@ -1,0 +1,11 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+Add Therapy
+    <form method="post" action="{% url 'therapy add' %}" enctype="multipart/form-data">
+    {{ form }}
+        <button>Submit</button>
+    {% csrf_token %}
+    </form>
+
+{% endblock %}

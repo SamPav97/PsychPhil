@@ -26,7 +26,7 @@ class Therapy(StrFromFieldsMixin, models.Model):
 
     image = models.FileField(
         blank=True,
-        null=True,
+        null=False,
     )
 
     # therapists = models.Many(
