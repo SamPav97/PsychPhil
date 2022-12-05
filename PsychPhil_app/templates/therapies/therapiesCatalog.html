@@ -1,11 +1,45 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block content %}
 
-    {% for therapy in therapies %}
-        {{ therapy.name }}
-    {% endfor %}
+    <section id="portfolio" class="portfolio">
+      <div class="container">
 
+        <div class="section-title">
+          <h2>Therapies</h2>
+                {% if request.user.is_therapist %}
+    <div><button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button></div>
+    {% endif %}
+          <p>Below you see the therapies that we currently offer:</p>
+        </div>
+        {% for therapy in therapies %}
+        <div class="row portfolio-container">
 
-<button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button>
+          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+            <div class="portfolio-wrap">
+              <figure>
+                <img src="{{ therapy.image.url }}" class="img-fluid" alt="Therapy Image">
+                <a href="{% url 'details therapy' pk=therapy.pk %}" class="link-details" title="More Details"><i class="bx bx-link"></i></a>
+              </figure>
+
+              <div class="portfolio-info">
+                <h4><a href="{% url 'details therapy' pk=therapy.pk %}">{{ therapy.name }}</a></h4>
+                <p>{{ therapy.description }}</p>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+        </div>
+      </div>
+
+    </section><!-- End Portfolio Section -->
+
+{#    {% for therapy in therapies %}#}
+{#        {{ therapy.name }}#}
+{#        <img src="/media/{{ therapy.image }}" alt="post" class="cover">#}
+{#    {% endfor %}#}
+{##}
+{##}
+{#<button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button>#}
 
 {% endblock %}

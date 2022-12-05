@@ -1,18 +1,26 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
+    <section id="hero" class="d-flex flex-column justify-content-center align-items-center">
+    <div class="container text-center text-md-left" data-aos="fade-up">
+      <h1>Welcome to <span>PsychPhil</span></h1>
+      <h2>A Clinic for the Deeper Minded</h2>
+        <h2>Here we offer therapy for those who seek more than quick fixes. We practice all the legitimate deep therapies. From Existential Therapy to Psychoanalysis, you name it!</h2>
+      <a href="#about" class="btn-get-started scrollto">Talk to us now!</a>
+    </div>
+  </section><!-- End Hero -->
             {# I style it here because when I style from css it won't find the file. Maybe fix this. #}
-        <section class="site-header" style=" background:
-    linear-gradient(rgba(0,0,0,0.3),
-    rgba(0,0,0,0.6)),
-    url({% static '/images/clinic.png'%}) no-repeat center;
-    background-size: cover;">
-            <h1>A Clinic for the Deeper Minded</h1>
-            <button><a href="#">LEARN MORE</a></button>
-        </section>
-        <section class="welcome">
-            <h2>Welcome to the PsychoPhil Clinic</h2>
-            <p>Here we offer therapy for those who seek more than quick fixes. We practce all the legitimate deep therpaies. From Existential Therapy to Psychoanalysis, you name it!</p>
-            <p>If you are interested, <span>talk to us now.</span></p>
-        </section>
+{#        <section class="site-header" style=" background:#}
+{#    linear-gradient(rgba(0,0,0,0.3),#}
+{#    rgba(0,0,0,0.6)),#}
+{#    url({% static '/images/clinic.png'%}) no-repeat center;#}
+{#    background-size: cover;">#}
+{#            <h1>A Clinic for the Deeper Minded</h1>#}
+{#            <button><a href="#">LEARN MORE</a></button>#}
+{#        </section>#}
+{#        <section class="welcome">#}
+{#            <h2>Welcome to the PsychoPhil Clinic</h2>#}
+{#            <p>Here we offer therapy for those who seek more than quick fixes. We practice all the legitimate deep therapies. From Existential Therapy to Psychoanalysis, you name it!</p>#}
+{#            <p>If you are interested, <span>talk to us now.</span></p>#}
+{#        </section>#}
 {% endblock %}

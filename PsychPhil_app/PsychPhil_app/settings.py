@@ -13,6 +13,8 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import cloudinary
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -37,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cloudinary',
 
     'PsychPhil_app.common',
     'PsychPhil_app.clients',
@@ -133,7 +137,13 @@ STATICFILES_DIRS = (
 )
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'mediafiles'
+
+cloudinary.config(
+    cloud_name="dmvvj6aea",
+    api_key="961724921271865",
+    api_secret="2m5mIyiqdSQvJHqR6lPbeiczuk4",
+    secure=True
+)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

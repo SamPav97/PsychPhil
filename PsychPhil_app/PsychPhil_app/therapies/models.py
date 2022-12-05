@@ -1,4 +1,5 @@
 from django.contrib.auth import get_user_model
+from cloudinary import models as cloudinary_models
 from django.db import models
 
 from PsychPhil_app.accounts.models import AppUser
@@ -10,6 +11,7 @@ UserModel = get_user_model()
 class Therapy(StrFromFieldsMixin, models.Model):
     str_fields = ('id', 'name')
     NAME_MAX = 200
+    SUMMARY_MAX = 300
     DESCRIPTION_MAX = 1000
 
     name = models.CharField(
@@ -18,19 +20,26 @@ class Therapy(StrFromFieldsMixin, models.Model):
         null=False,
     )
 
-    description = models.CharField(
+    summary = models.CharField(
+        max_length=SUMMARY_MAX,
+        blank=False,
+        null=False,
+    )
+
+    description = models.TextField(
         max_length=DESCRIPTION_MAX,
         blank=False,
         null=False,
     )
 
-    image = models.FileField(
+    image = cloudinary_models.CloudinaryField(
         blank=True,
         null=False,
     )
 
-    # therapists = models.Many(
-    #     AppUser,
-    #     blank=True
-    # )
+    therapists = models.ManyToManyField(
+        AppUser,
+        blank=True,
+        related_name="therapists"
+    )
 

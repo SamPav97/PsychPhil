@@ -1,27 +1,69 @@
 {% extends 'base/base.html' %}
 {% block content %}
 
-    <!-- Start Login Section-->
-    <div class="login-register-div">
-        <div class="login-register-box">
-            <h1>Petstagram</h1>
+    <section id="contact" class="contact section-bg">
+      <div class="container">
+        <div class="section-title">
+          <h2>Log In</h2>
+        </div>
+      </div>
 
-            <!-- Start Login Form-->
-            <form method="post" action="{% url 'login user' %}">
-                {{ form }}
-                <input type="hidden" name="next" value="{{ next }}">
-                <!-- Login Button-->
-                <button type="submit">Log in</button>
+        <div class="row mt-5 justify-content-center">
+          <div class="col-lg-10">
+            <form action="{% url 'login user' %}" method="post" role="form">
+              <div class="row">
+{#                <div class="col-md-6 form-group">#}
+{#                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>#}
+{#                </div>#}
+{#                <div class="form-group mt-3">#}
+                    {{ form }}
+{#                  <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="form-group mt-3">#}
+{#                <input type="password" class="form-control" name="Password" id="Password" placeholder="Password" required>#}
+{#              </div>#}
+{#              <div class="form-group mt-3">#}
+{#                <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>#}
+{#              </div>#}
+{#              <div class="my-3">#}
+{#                <div class="loading">Loading</div>#}
+{#                <div class="error-message">{{ form.errors }}</div>#}
+{#              </div>#}
+                <input type="hidden" name="next" value="{% url 'index' %}">
+              <div class="text-center"><button type="submit">Log in</button></div>
                 {% csrf_token %}
+              </div>
             </form>
-            <!-- End Login Form -->
+          </div>
 
         </div>
-        <div class="second-option">
+        <div>
+            <p>Don't have account? <a href="{% url 'register user' %}">Register</a></p>
+      </div>
+    </section><!--
 
-            <!-- Link to Register Page-->
-            <p>Don't have account? <a href="#">Register</a></p>
-        </div>
-    </div>
-    <!-- End Login Section-->
+{#    <!-- Start Login Section-->#}
+{#    <div class="login-register-div">#}
+{#        <div class="login-register-box">#}
+{#            <h1>Petstagram</h1>#}
+{##}
+{#            <!-- Start Login Form-->#}
+{#            <form method="post" action="{% url 'login user' %}">#}
+{#                {{ form }}#}
+{#                <input type="hidden" name="next" value="{{ next }}">#}
+{#                <!-- Login Button-->#}
+{#                <button type="submit">Log in</button>#}
+{#                {% csrf_token %}#}
+{#            </form>#}
+{#            <!-- End Login Form -->#}
+{##}
+{#        </div>#}
+{#        <div class="second-option">#}
+{##}
+{#            <!-- Link to Register Page-->#}
+{#            <p>Don't have account? <a href="#">Register</a></p>#}
+{#        </div>#}
+{#    </div>#}
+{#    <!-- End Login Section-->#}
 {% endblock %}
