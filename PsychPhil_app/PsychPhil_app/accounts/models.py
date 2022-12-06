@@ -3,6 +3,7 @@ from enum import Enum
 from django.contrib.auth import models as auth_models
 from django.db import models
 from django.core import validators
+from cloudinary import models as cloudinary_models
 
 from PsychPhil_app.accounts.managers import AppUserManager
 from PsychPhil_app.core.model_mixins import ChoicesEnumMixin
@@ -47,6 +48,8 @@ class Profile(models.Model):
     MAX_LEN_FIRST_NAME = 30
     MIN_LEN_LAST_NAME = 2
     MAX_LEN_LAST_NAME = 30
+    MIN_LEN_SUMMARY = 30
+    MAX_LEN_SUMMARY = 300
 
     first_name = models.CharField(
         max_length=MAX_LEN_FIRST_NAME,
@@ -65,6 +68,19 @@ class Profile(models.Model):
             validate_only_letters,
         )
     )
+# KINDA DONE I gotta make sure that these newly added are reflected in form and in edit profile. they should show up only if therapist and (optimally) be compulsary
+    self_summary = models.TextField(
+        max_length=MAX_LEN_SUMMARY,
+        blank=True,
+        validators=(
+            validators.MinLengthValidator(MIN_LEN_SUMMARY),
+        )
+    )
+
+    image = cloudinary_models.CloudinaryField(
+        blank=True,
+        null=False,
+    )
 
     gender = models.CharField(
         choices=Gender.choices(),
@@ -81,6 +97,7 @@ class Profile(models.Model):
         AppUser,
         primary_key=True,
         on_delete=models.CASCADE,
+        related_name="profile",
     )
 
 

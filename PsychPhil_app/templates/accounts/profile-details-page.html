@@ -1,127 +1,69 @@
 {% extends 'base/base.html' %}
+{% load static %}
 {% block content %}
-{% load static  %}
-    <!-- Start Profile Details Section -->
-    <div class="profile">
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
 
-        <!-- Start Profile Personal Data Section -->
-        <div class="profile-data">
-            <div class="profile_img">
-                <div class="image">
+            <div class="row gy-4">
 
-                    <!-- Profile Image -->
-                    <img src="{% static 'images/person.png' %}" alt="img8">
+                <div class="col-lg-8">
+                    <div class="portfolio-details-slider swiper">
+                        <div class="swiper-wrapper align-items-center">
+                            {% if object.profile.image.url %}
+                            <div>
+                                <img src="{{ object.profile.image.url }}" alt="Profile Picture">
+                            </div>
+                            {% else %}
+                            <div> Please upload a profile picture.</div>
+                            {% endif %}
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
                 </div>
-            </div>
-            <div class="personal">
-                <div class="edit">
-                    <!-- User Username -->
-                    <p>{{ object.username }}</p>
-                    {% if is_owner %}
-                    <!-- IF the viewer is the owner of the profile -->
-                    <!-- Link to Edit Profile Page -->
-                    <a href="{% url 'update user' pk=request.user.pk %}">
-                        Update Prof
-                    </a>
 
-                    <!-- Link to Delete Profile Page -->
-                    <a href="{% url 'delete user' pk=request.user.pk %}">
-                        Remove User
-                    </a>
-                    <!-- End IF the viewer is the owner of the profile -->
-                    {% endif %}
-                </div>
-                <div class="data">
+                <div class="col-lg-4">
+                    <div class="portfolio-info">
+                        <h3>{{ object.profile.first_name }} {{ object.profile.last_name }}
+                            {% if is_owner %}
+                                <button><a href="{% url 'update user' object.pk %}">
+                                    Edit
+                                </a></button>
+                                <button><a href="{% url 'delete user' object.pk %}">
+                                    Delete
+                                </a></button>
+                            {% else %}
+                                <a href="#">
+                                    <button>Contact</button>
+                                </a>
+                            {% endif %}
 
-                    <!-- Total Number of Photos by the User -->
-                    {% if is_therapist %}:
-                        This user is a therapist
+                        </h3>
+                        <ul>
+                            {#                            If contact form dont work i can just have contact details here#}
+                            <li><strong>Email</strong>: {{ object.email }}</li>
+                            <li><strong>Gender</strong>: {{ object.profile.gender }}</li>
+                        {% if is_therapist %}
+                            <li><strong>Schools Membership</strong>:
+                                {% for therapy in therapies_member_of %}{{ therapy.name }}; {% endfor %}</li>
                         {% else %}
-                        Not therapist
+                            <li><strong>Stauts</strong>: Client
+                        {% endif %}
+                        </ul>
+                    </div>
+
+                    {% if is_therapist %}
+                        <div class="portfolio-description">
+                            <h2>Therapist Summary:</h2>
+                            <p>
+                                {{ object.profile.self_summary }}
+                            </p>
+                        </div>
+                        </div>
                     {% endif %}
 
-                    <!-- Total Number of Pets owned by the User -->
-                    <span></span>
-                    <p>pets</p>
-
-                    <!-- Total Number of Likes for the User -->
-                    <span></span>
-                    <p>likes</p>
-                </div>
-
-                {% if object.get_full_name %}
-                <!-- User First and Last Name IF Added -->
-                <h3 class="names">{{ object.get_full_name }}</h3>
-                {% endif %}
-
-                <!-- User Email Address -->
-                <p class="email">{{ object.email }}</p>
-
-                {% if object.gender %}
-                <!-- User Gender IF Added -->
-                <p class="gender">{{ object.gender }}</p>
-                {% endif  %}
             </div>
+
         </div>
-        <!-- End Profile Personal Data Section -->
-
-        <!-- Start Pets Data Section -->
-        <div class="pets">
-            <div class="statuses">
-{#                {% for pet in object.pet_set.all %}#}
-{#                <!-- Start 1st Pet Details Page -->#}
-{#                <!-- Link to First Pet Details Page -->#}
-{#                <a href="#">#}
-{#                    <div class="head-pet">#}
-{#                        <div class="status">#}
-{#                            <div class="image">#}
-{#                                <!-- Pet Image -->#}
-{#                                <img src="{{ pet.personal_photo }}"#}
-{#                                     alt="image of {{ pet.name }}">#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        <!-- Pet Name -->#}
-{#                        <p></p>#}
-{#                    </div>#}
-{#                </a>#}
-{#                {% endfor %}#}
-                <!-- End 1st Pet Details Page -->
-            </div>
-        </div>
-        <!-- End Pets Data Section -->
-
-        <!-- Start Last Uploaded Photos Section -->
-        <div class="pet-photos">
-
-            <!-- Link to Last Uploaded Pet Photo -->
-            <a href="#">
-                <!-- Pet Photo -->
-                <img src="https://i.natgeofe.com/n/de94c416-6d23-45f5-9708-e8d56289268e/naturepl_01132178.jpg?w=636&h=631"
-                     alt="pet img">
-            </a>
-
-            <!-- Link to Uploaded Pet Photo -->
-            <a href="#">
-                <!-- Pet Photo -->
-                <img src="https://cf.ltkcdn.net/small-pets/images/orig/278587-1600x1066-goldfish-swimming-in-fish-tank.jpg"
-                     alt="pet img">
-            </a>
-
-            <!-- Link to Uploaded Pet Photo -->
-            <a href="#">
-                <!-- Pet Photo -->
-                <img src="https://thumbs.dreamstime.com/b/small-golden-retriever-puppy-6482030.jpg" alt="pet img">
-            </a>
-
-            <!-- Link to  Uploaded Pet Photo -->
-            <a href="#">
-                <!-- Pet Photo -->
-                <img src="https://i.pinimg.com/originals/4e/55/83/4e5583748bc4000805df50e4ebcafffc.png" alt="pet img">
-            </a>
-        </div>
-        <!-- End Last Uploaded Photos Section -->
-
-    </div>
-    <!-- End Profile Details Section -->
+    </section><!-- End Portfolio Details Section -->
 
 {% endblock %}

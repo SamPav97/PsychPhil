@@ -1,7 +1,7 @@
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django import forms
 
-from PsychPhil_app.accounts.models import Profile
+from PsychPhil_app.accounts.models import Profile, Gender
 
 UserModel = get_user_model()
 
@@ -24,19 +24,31 @@ class SignUpForm(auth_forms.UserCreationForm):
         model = UserModel
         fields = (UserModel.USERNAME_FIELD, 'password1', 'password2', 'first_name', 'last_name', 'age')
 
-    # I now save with a signal
-    # # save with data for profile
-    # def save(self, commit=True):
-    #     user = super().save(commit=commit)
-    #
-    #     profile = Profile(
-    #         first_name=self.cleaned_data['first_name'],
-    #         last_name=self.cleaned_data['last_name'],
-    #         age=self.cleaned_data['age'],
-    #         user=user,
-    #     )
-    #     if commit:
-    #         profile.save()
-    #
-    #     return user
+
+class EditForm(forms.ModelForm):
+    first_name = forms.CharField(
+        required=True
+    )
+    last_name = forms.CharField(
+        required=True
+    )
+
+    gender = forms.ChoiceField(
+        choices=Gender.choices(),
+        required=True
+    )
+
+    self_summary = forms.Textarea(
+    )
+
+    age = forms.IntegerField(
+        required=True
+    )
+    image = forms.ImageField(
+        required=False
+    )
+
+    class Meta:
+        model = Profile
+        fields = ('first_name', 'last_name', 'age', 'gender', 'self_summary', 'age', 'image', )
 

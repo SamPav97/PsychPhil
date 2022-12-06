@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Practicing Therapists</h2>
+                <p>Below are the available therapists for <strong>{{ therapy.name }}</strong> therapy</p>
+            </div>
+
+            <div class="row">
+
+                {% for therapist in therapists %}
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                        <div class="member">
+                            <img src="{{ therapist.profile.image.url }}" alt="">
+                            <h4>{{ therapist.profile.first_name }} {{ therapist.profile.last_name }}</h4>
+                            <span>{{ therapist.email }}</span>
+                            <p>
+                                {{ therapist.profile.self_summary }}
+                            </p>
+                            <div class="social">
+                                <a href="{% url 'details user' pk=therapist.pk %}"><button>Go to Profile</button></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+            </div>
+
+        </div>
+    </section><!-- End Team Section -->
+
+
+{% endblock %}

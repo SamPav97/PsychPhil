@@ -7,7 +7,8 @@
             <li><a class="nav-link scrollto" href="{% url 'therapies' %}">Therapies</a></li>
             <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
             {% if request.user.is_authenticated %}
-                <li><a class="nav-link scrollto " href="#portfolio">Careers</a></li>
+                <li><a class="nav-link scrollto " href="{% url 'details user' pk=request.user.pk %}">Profile</a></li>
+                <li><a class="nav-link scrollto " href="{% url 'candidate' %}">Careers</a></li>
                 <li><a class="nav-link scrollto " href="{% url 'logout user' %}">Log out</a></li>
             {% else %}
                 <li><a class="nav-link scrollto" href="{% url 'login user' %}">Log in</a></li>

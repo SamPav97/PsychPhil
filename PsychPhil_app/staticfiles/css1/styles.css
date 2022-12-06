@@ -169,8 +169,8 @@ h6 {
 }
 
 .navbar a:hover,
-.navbar .active,
-.navbar .active:focus,
+/*.navbar .active,*/
+/*.navbar .active:focus,*/
 .navbar li:hover>a {
   color: #3498db;
 }

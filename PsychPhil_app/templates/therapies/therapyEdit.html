@@ -4,32 +4,30 @@
 
     <div class="row mt-5 justify-content-center">
         <h1></h1>
-        <h1 style="align-content: center">Edit Account: {{ object.first_name }} </h1>
+        <h1 style="align-content: center">Edit Therapy: {{ object.name }}</h1>
         <div class="col-lg-10">
-            <form action="{% url 'update user' pk=object.pk %}" method="post" role="form" enctype="multipart/form-data">
+            <form action="{% url 'edit therapy' pk=object.pk %}" method="post" role="form" enctype="multipart/form-data">
                 <div class="row">
                     <div class="col-md-6 form-group">
-                        {{ form.first_name.label }}:{{ form.first_name|placeholder:'First Name' }}
+                        {{ form.name.label }}:{{ form.name|placeholder:'Therapy Name' }}
                         {#                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>#}
                     </div>
                     <div class="form-group mt-3">
-                        {{ form.last_name.label }}:{{ form.last_name|placeholder:'Last Name' }}
+                        {{ form.founder.label }}:{{ form.founder|placeholder:'Therapy/School Founder' }}
                         {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
                     </div>
                     <div class="form-group mt-3">
-                        {{ form.gender.label }}:{{ form.gender }}
+                        {{ form.summary.label }}:{{ form.summary|placeholder:'One-sentence summary' }}
                         {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
                     </div>
                     <div class="form-group mt-3">
-                        {{ form.age.label }}:{{ form.age|placeholder:'Age' }}
+                        {{ form.url.label }}:{{ form.url|placeholder:'More information URL' }}
                         {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
                     </div>
-                    {% if is_therapist %}
                     <div class="form-group mt-3">
-                        {{ form.self_summary|placeholder:'Describe Your Personal Approach' }}
+                        {{ form.description|placeholder:'Describe the therapy' }}
                         {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
                     </div>
-                    {% endif %}
 
                     Image: {{ form.image }}
                     {% csrf_token %}

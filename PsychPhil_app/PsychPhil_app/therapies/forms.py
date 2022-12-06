@@ -9,4 +9,10 @@ UserModel = get_user_model()
 class CreateTherapy(forms.ModelForm):
     class Meta:
         model = Therapy
-        fields = '__all__'
+        fields = ('name', 'summary', 'founder', 'url', 'description', 'image')
+
+
+class EditTherapy(forms.ModelForm):
+    class Meta:
+        model = Therapy
+        fields = ('name', 'summary', 'founder', 'url', 'description', 'image')

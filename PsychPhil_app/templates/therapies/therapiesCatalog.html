@@ -3,43 +3,66 @@
 {% block content %}
 
     <section id="portfolio" class="portfolio">
-      <div class="container">
+        <div class="container">
 
-        <div class="section-title">
-          <h2>Therapies</h2>
+            <div class="section-title">
+                <h2>Therapies</h2>
                 {% if request.user.is_therapist %}
-    <div><button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button></div>
-    {% endif %}
-          <p>Below you see the therapies that we currently offer:</p>
-        </div>
-        {% for therapy in therapies %}
-        <div class="row portfolio-container">
-
-          <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
-            <div class="portfolio-wrap">
-              <figure>
-                <img src="{{ therapy.image.url }}" class="img-fluid" alt="Therapy Image">
-                <a href="{% url 'details therapy' pk=therapy.pk %}" class="link-details" title="More Details"><i class="bx bx-link"></i></a>
-              </figure>
-
-              <div class="portfolio-info">
-                <h4><a href="{% url 'details therapy' pk=therapy.pk %}">{{ therapy.name }}</a></h4>
-                <p>{{ therapy.description }}</p>
-              </div>
+                    <div>
+                        <button><a href="{% url 'therapy add' %}">Add Therapy</a></button>
+                    </div>
+                {% endif %}
+                <p>Below you see the therapies that we currently offer:</p>
             </div>
-          </div>
-        {% endfor %}
+{#        PAGINATION NEEEDS STYLING !!!!!!!!!!!!!!!!1#}
+            <div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+            </div>
+{#        END OF PAGINATION#}
+            {% for therapy in therapies %}
+                <div class="row portfolio-container">
+
+                <div class="col-lg-4 col-md-6 portfolio-item filter-app wow fadeInUp">
+                    <div class="portfolio-wrap">
+                        <figure>
+                            <img src="{{ therapy.image.url }}" class="img-fluid" alt="Therapy Image">
+                            <a href="{% url 'details therapy' pk=therapy.pk %}" class="link-details"
+                               title="More Details"><i class="bx bx-link"></i></a>
+                        </figure>
+
+                        <div class="portfolio-info">
+                            <h4><a href="{% url 'details therapy' pk=therapy.pk %}">{{ therapy.name }}</a></h4>
+                            <p>{{ therapy.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+
+            </div>
         </div>
-      </div>
 
     </section><!-- End Portfolio Section -->
 
-{#    {% for therapy in therapies %}#}
-{#        {{ therapy.name }}#}
-{#        <img src="/media/{{ therapy.image }}" alt="post" class="cover">#}
-{#    {% endfor %}#}
-{##}
-{##}
-{#<button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button>#}
+    {#    {% for therapy in therapies %}#}
+    {#        {{ therapy.name }}#}
+    {#        <img src="/media/{{ therapy.image }}" alt="post" class="cover">#}
+    {#    {% endfor %}#}
+    {##}
+    {##}
+    {#<button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button>#}
 
 {% endblock %}

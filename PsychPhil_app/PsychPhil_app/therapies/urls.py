@@ -1,7 +1,7 @@
 from django.urls import path, include
 
 from PsychPhil_app.therapies.views import TherapiesCatalogView, AddTherapyView, TherapyDetails, join_therapy, \
-    leave_therapy
+    leave_therapy, EditTherapyView, TherapyDeleteView, ShowTherapistsView
 
 urlpatterns = (
     path('', TherapiesCatalogView.as_view(), name='therapies'),
@@ -10,7 +10,8 @@ urlpatterns = (
     path('therapistLeave/<int:pk>/', leave_therapy, name='therapist leave'),
     path('details/<int:pk>/', include([
             path('', TherapyDetails.as_view(), name='details therapy'),
-            #path('update/', UserUpdateView.as_view(), name='update user'),
-            #path('delete/', UserDeleteView.as_view(), name='delete user'),
+            path('edit/', EditTherapyView.as_view(), name='edit therapy'),
+            path('delete/', TherapyDeleteView.as_view(), name='delete therapy'),
+            path('therapists/', ShowTherapistsView.as_view(), name='show therapists'),
         ])),
 )

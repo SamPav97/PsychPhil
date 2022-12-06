@@ -26,6 +26,17 @@ class Therapy(StrFromFieldsMixin, models.Model):
         null=False,
     )
 
+    founder = models.CharField(
+        max_length=NAME_MAX,
+        blank=False,
+        null=False,
+    )
+
+    url = models.URLField(
+        blank=False,
+        null=False,
+    )
+
     description = models.TextField(
         max_length=DESCRIPTION_MAX,
         blank=False,
@@ -37,9 +48,15 @@ class Therapy(StrFromFieldsMixin, models.Model):
         null=False,
     )
 
+    user = models.ForeignKey(
+        UserModel,
+        blank=True,
+        on_delete=models.CASCADE,
+    )
+
     therapists = models.ManyToManyField(
         AppUser,
         blank=True,
-        related_name="therapists"
+        related_name="therapists",
     )
 

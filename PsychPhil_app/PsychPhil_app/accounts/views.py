@@ -2,7 +2,7 @@ from django.contrib.auth import views as auth_views, get_user_model, login
 from django.urls import reverse_lazy
 from django.views import generic as views
 
-from PsychPhil_app.accounts.forms import SignUpForm
+from PsychPhil_app.accounts.forms import SignUpForm, EditForm
 from PsychPhil_app.accounts.models import Profile
 
 UserModel = get_user_model()
@@ -38,6 +38,10 @@ class UserDetailsView(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
+        if self.request.user.is_authenticated:
+            context['therapies_member_of'] = self.request.user.therapists.all()
+            print(context['therapies_member_of'])
+
         context['is_owner'] = self.request.user == self.object
         context['is_therapist'] = self.object.is_therapist
 
@@ -46,9 +50,17 @@ class UserDetailsView(views.DetailView):
 
 class UserUpdateView(views.UpdateView):
     template_name = 'accounts/profile-edit-page.html'
+    form_class = EditForm
     model = Profile
 
-    fields = ('first_name', 'last_name', 'gender', 'age')
+    # fields = ('first_name', 'last_name', 'gender', 'age', 'self_summary', 'image')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+
+        context['is_therapist'] = self.request.user.is_therapist
+
+        return context
 
     def get_success_url(self):
         return reverse_lazy('details user', kwargs={
