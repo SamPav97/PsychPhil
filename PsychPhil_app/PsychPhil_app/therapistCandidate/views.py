@@ -40,6 +40,8 @@ class CandidateView(NonTherapistRequiredMixin, LoginRequiredMixin, views.CreateV
 # Needs to be function view because I want to use the decorator.
 @staff_member_required
 def acceptance_view(request):
+    # TODO pagination would be nice here.
+    # TODO send email upon acceptance or denial.
 
     candidates = TherapistCand.objects.all()
 
@@ -51,9 +53,9 @@ def acceptance_view(request):
 
 
 class RefuteCandidate(views.DeleteView):
-    template_name = 'candidates/candidate-refute-page.html'
+    template_name = 'candidates/candidate-decline-page.html'
     model = TherapistCand
-    success_url = reverse_lazy('acceptance')
+    success_url = reverse_lazy('see candidates')
 
 
 def accept_candidate(request, pk):
@@ -69,6 +71,4 @@ def accept_candidate(request, pk):
 
     candidate.delete()
 
-    return redirect('acceptance')
-
-# TODO make other candidate views
+    return redirect('see candidates')

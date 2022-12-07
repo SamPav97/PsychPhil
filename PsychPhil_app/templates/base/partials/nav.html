@@ -1,11 +1,13 @@
 {% load static %}
 
       <nav id="navbar" class="navbar order-last order-lg-0">
-        <ul>
+        <ul>{% if request.user.is_staff %}
+            <li><a class="nav-link scrollto active" href="{% url 'see candidates' %}">Candidates</a></li>
+        {% endif %}
             <li><a class="nav-link scrollto active" href="{% url 'index' %}">Home</a></li>
-            <li><a class="nav-link scrollto" href="#about">About</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'about' %}">About</a></li>
             <li><a class="nav-link scrollto" href="{% url 'therapies' %}">Therapies</a></li>
-            <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+            <li><a class="nav-link scrollto" href="{% url 'contact' %}">Contact</a></li>
             {% if request.user.is_authenticated %}
                 <li><a class="nav-link scrollto " href="{% url 'details user' pk=request.user.pk %}">Profile</a></li>
                 <li><a class="nav-link scrollto " href="{% url 'candidate' %}">Careers</a></li>

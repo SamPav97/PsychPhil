@@ -1,28 +1,60 @@
 {% extends 'base/base.html' %}
-{% load static %}
 {% block content %}
 
-    <!-- Start Register Section -->
-    <div class="login-register-div">
-        <div class="login-register-box">
-            <h1>Candidates</h1>
+    <!-- ======= Services Section ======= -->
+    <section id="services" class="services section-bg">
+        <div class="container">
 
-            <!-- Start Register Form -->
-            {% for candidate in candidates %}
-                {{ candidate.user }}
+            <div class="section-title">
+                <h2>Applications</h2>
+                <p>Here the staff can accept and reject applicants for therapists</p>
+            </div>
+            <div class="row">
+                {% for candidate in candidates %}
+                    <div class="col-md-6">
+                        <div class="icon-box">
+                            <i class="bi bi-briefcase"></i>
+                            <h4>
+                                <a href="{% url 'details user' pk=candidate.user.pk %}">{{ candidate.user.profile.first_name }} {{ candidate.user.profile.last_name }}</a>
+                                <button><a href="{% url 'accept candidate' pk=candidate.pk %}">
+                                    Accept
+                                </a></button>
+                                <button><a href="{% url 'decline candidate' pk=candidate.pk %}">
+                                    Decline
+                                </a></button>
+                            </h4>
 
-                <a href="{% url 'accept candidate' pk=candidate.pk %}">
-                    Accept
-                </a>
+                            <p>{{ candidate.motivation }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
 
-                <a href="{% url 'refute candidate' pk=candidate.pk %}">
-                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">
-                </a>
-            {% endfor %}
-            <!-- End Register Form -->
+            </div>
 
         </div>
-    </div>
-    <!-- End Register Section -->
+    </section><!-- End Services Section -->
+
+    {#    <!-- Start Register Section -->#}
+    {#    <div class="login-register-div">#}
+    {#        <div class="login-register-box">#}
+    {#            <h1>Candidates</h1>#}
+    {##}
+    {#            <!-- Start Register Form -->#}
+    {#            {% for candidate in candidates %}#}
+    {#                {{ candidate.user }}#}
+    {#\#}
+    {#                <a href="{% url 'accept candidate' pk=candidate.pk %}">#}
+    {#                    Accept#}
+    {#                </a>#}
+    {##}
+    {#                <a href="{% url 'refute candidate' pk=candidate.pk %}">#}
+    {#                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">#}
+    {#                </a>#}
+    {#            {% endfor %}#}
+    {#            <!-- End Register Form -->#}
+    {##}
+    {#        </div>#}
+    {#    </div>#}
+    {#    <!-- End Register Section -->#}
 
 {% endblock %}

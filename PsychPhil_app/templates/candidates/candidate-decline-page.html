@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+
+            <div class="row gy-4">
+                <h1>Are you sure that you want to <strong>decline</strong> the following candidate:</h1>
+
+                <div class="col-lg-8">
+                    <div class="portfolio-details-slider swiper">
+                        <div class="swiper-wrapper align-items-center">
+                            {% if object.profile.image.url %}
+                                <div>
+                                    <img src="{{ object.profile.image.url }}" alt="Profile Picture">
+                                </div>
+                            {% else %}
+                                <div> Please upload a profile picture.</div>
+                            {% endif %}
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="portfolio-info">
+                        <h3>{{ object.user.profile.first_name }} {{ object.user.profile.last_name }}
+
+                            <div>
+                                <form method="post" action="{% url 'decline candidate' pk=object.pk %}">
+                                    <!-- Yes (Delete Profile) Button -->
+                                    <button>DECLINE</button>
+                                    {% csrf_token %}
+                                    <!-- Go Back Button -->
+                                </form>
+                                <a href="javascript:history.back()">Go Back</a>
+                            </div>
+
+                        </h3>
+                        <ul>
+                            {#                            If contact form dont work i can just have contact details here#}
+                            <li><strong>Email</strong>: {{ object.email }}</li>
+                            <li><strong>Gender</strong>: {{ object.profile.gender }}</li>
+                            {% if is_therapist %}
+                                <li><strong>Schools Membership</strong>:
+                                    {% for therapy in therapies_member_of %}{{ therapy.name }}; {% endfor %}</li>
+                            {% else %}
+                                <li><strong>Stauts</strong>: Client
+                            {% endif %}
+                        </ul>
+                    </div>
+
+                    {% if is_therapist %}
+                        <div class="portfolio-description">
+                            <h2>Therapist Summary:</h2>
+                            <p>
+                                {{ object.profile.self_summary }}
+                            </p>
+                        </div>
+                        </div>
+                    {% endif %}
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Details Section -->
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{#{% extends 'base/base.html' %}#}
+{#{% load static %}#}
+{#{% block content %}#}
+{#    <!-- Start Delete Profile Section -->#}
+{#        <div class="delete-profile">#}
+{#            <h1>#}
+{#                Are you sure you want to refute this candidate?#}
+{#            </h1>#}
+{#            <div class="sure-buttons">#}
+{#                <form method="post" action="{% url 'refute candidate' pk=object.pk %}">#}
+{#                <!-- Yes (Delete Profile) Button -->#}
+{#                    <button>Yes</button>#}
+{#                    {% csrf_token %}#}
+{#                <!-- Go Back Button -->#}
+{#                    <a class="edit-btn" href="javascript:history.back()">Go Back</a>#}
+{#                </form>#}
+{#            </div>#}
+{#            <img src="{% static 'images/are_you_sure_cat.gif' %}" alt="are you sure cat git">#}
+{#        </div>#}
+{#    <!-- End Delete Profile Section -->#}
+{#{% endblock %}#}
