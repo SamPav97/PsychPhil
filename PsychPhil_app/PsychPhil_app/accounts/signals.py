@@ -17,3 +17,11 @@ def create_employee_on_user_created(instance, created, *args, **kwargs):
     Profile.objects.create(
         user_id=instance.pk,
     )
+
+
+# Delete prof when appuser gets deleted
+@receiver(signals.pre_delete, sender=UserModel)
+def delete_profile_when_account_deleted(instance, **kwargs):
+    Profile.objects.get(
+        user_id=instance.pk,
+    ).delete()

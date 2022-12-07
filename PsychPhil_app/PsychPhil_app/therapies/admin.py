@@ -1,3 +1,8 @@
 from django.contrib import admin
 
-# Register your models here.
+from PsychPhil_app.therapies.models import Therapy
+
+
+@admin.register(Therapy)
+class TherpyAdmin(admin.ModelAdmin):
+    pass
