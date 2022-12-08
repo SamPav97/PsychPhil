@@ -26,11 +26,13 @@ class CandidateView(NonTherapistRequiredMixin, LoginRequiredMixin, views.CreateV
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        is_candidate = TherapistCand.objects.all() \
-            .filter(user_id=self.request.user.pk) \
-            .get()
-        print(is_candidate)
-        context['is_candidate'] = is_candidate
+        try:
+            is_candidate = TherapistCand.objects.all() \
+                .filter(user_id=self.request.user.pk) \
+                .get()
+            context['is_candidate'] = is_candidate
+        except:
+            context['is_candidate'] = False
 
         return context
 

@@ -9,3 +9,5 @@ urlpatterns = (
     path('refute/<int:pk>/', RefuteCandidate.as_view(), name='decline candidate'),
     path('accept/<int:pk>/', accept_candidate, name='accept candidate'),
 )
+
+from .signals import *
