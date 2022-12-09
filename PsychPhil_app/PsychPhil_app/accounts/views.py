@@ -40,7 +40,6 @@ class UserDetailsView(views.DetailView):
 
         if self.request.user.is_authenticated:
             context['therapies_member_of'] = self.request.user.therapists.all()
-            print(context['therapies_member_of'])
 
         context['is_owner'] = self.request.user == self.object
         context['is_therapist'] = self.object.is_therapist

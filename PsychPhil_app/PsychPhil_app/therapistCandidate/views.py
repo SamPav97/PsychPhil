@@ -1,12 +1,18 @@
 from django.contrib.admin.views.decorators import staff_member_required
+from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.core.mail import send_mail
 from django.shortcuts import render, redirect
+from django.template.loader import render_to_string
 from django.urls import reverse_lazy
+from django.utils.html import strip_tags
 from django.views import generic as views
 
-from PsychPhil_app.accounts.models import AppUser
+from PsychPhil_app import settings
 from PsychPhil_app.therapistCandidate.mixins import NonTherapistRequiredMixin
 from PsychPhil_app.therapistCandidate.models import TherapistCand
+
+UserModel = get_user_model()
 
 
 class CandidateView(NonTherapistRequiredMixin, LoginRequiredMixin, views.CreateView):
@@ -65,12 +71,27 @@ def accept_candidate(request, pk):
             .filter(pk=pk) \
             .get()
 
-    make_therapist = AppUser.objects \
+    make_therapist = UserModel.objects \
         .filter(pk=candidate.user_id) \
         .get()
     make_therapist.is_therapist = True
     make_therapist.save()
 
+    user = UserModel.objects.all() \
+        .filter(pk=candidate.user_id) \
+        .get()
+
     candidate.delete()
+
+    email_content = render_to_string('email_templates/approved_for_therapist.html', {
+        'user': user,
+    })
+    send_mail(
+        subject='Your application for therapist was successful!',
+        message=strip_tags(email_content),
+        html_message=email_content,
+        from_email=settings.DEFAULT_FROM_EMAIL,
+        recipient_list=(user.email,),
+    )
 
     return redirect('see candidates')
