@@ -13,4 +13,4 @@ customized forms; customized user and login/register/logout functionality; publi
 Frontend: made with Django templates (HTML & CSS).
 
 Experience gained with: Django, PostgreSQL, AWS, Docker, classes and objects, class hierarchies, encapsulation, inheritance, polymorphism;
-iterators and generators, decorators, unit-testing, TDD, SOLID Principles, SSR, etc.
+iterators and generators, decorators, unit-testing, integration testing, SOLID Principles, SSR, etc.
