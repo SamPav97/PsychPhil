@@ -3,6 +3,7 @@
 <nav id="navbar" class="navbar order-last order-lg-0">
     <ul>{% if request.user.is_staff %}
         <li><a class="nav-link scrollto active" href="{% url 'see candidates' %}">Candidates</a></li>
+        <li><a class="nav-link scrollto active" href="{% url 'texts' %}">Messages</a></li>
     {% endif %}
         {% if request.user.is_authenticated %}
             <li><a class="nav-link scrollto " href="{% url 'search' %}">Search Therapists</a></li>

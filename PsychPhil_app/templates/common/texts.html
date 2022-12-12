@@ -1,0 +1,36 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+        <div class="container">
+
+            <div class="row">
+
+                {% for text in texts %}
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                        <div class="member">
+                            <img src="{{ text.user.profile.image.url }}" alt="No Prof Picture">
+                            <h4>{{ text.user.email }}</h4>
+                            <span>{{ text.subject }}</span>
+                            <p>
+                                {{ text.content }}
+                            </p>
+                            <div class="social">
+                                <a href="{% url 'delete message' pk=text.pk %}"><button>Delete</button></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+            </div>
+
+        </div>
+    </section><!-- End Team Section -->
+
+
+{% endblock %}
