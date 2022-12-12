@@ -100,6 +100,9 @@ class Profile(models.Model):
         related_name="profile",
     )
 
+    def __str__(self):
+        return f"{self.first_name} {self.last_name}"
+
 
 # class AppUser(auth_models.AbstractUser):
 #     MIN_LEN_FIRST_NAME = 2

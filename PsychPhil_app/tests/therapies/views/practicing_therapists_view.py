@@ -4,7 +4,7 @@ from tests.therapies import TestCaseBase
 from tests.utils.creation_utils import create_therapy_for_user
 
 
-# Another test I cand do here is with pagination
+# TODO Another test I can do here is with pagination
 class TherapistsViewTests(TestCaseBase):
     VALID_USER_DATA = {
         'email': 'test_user@psychphil.tk',

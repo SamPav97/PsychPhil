@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+
+    <!-- ======= Team Section ======= -->
+    <section id="team" class="team">
+        <div class="container">
+
+            <!-- Start Searchbar Form -->
+            <form class="searchbar" method="get" action="{% url 'search' %}">
+                Name of Therapist: {{ form.therapistName }}
+                <button>
+                    Search
+                </button>
+                {% csrf_token %}
+            </form>
+
+            <div class="row">
+
+                {% for therapist in therapists %}
+
+                    <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
+                        <div class="member">
+                            <img src="{{ therapist.profile.image.url }}" alt="">
+                            <h4>{{ therapist.first_name }} {{ therapist.last_name }}</h4>
+                            <span>{{ therapist.email }}</span>
+                            <p>
+                                {{ therapist.profile.self_summary }}
+                            </p>
+                            <div class="social">
+                                <a href="{% url 'details user' pk=therapist.user_id %}"><button>Go to Profile</button></a>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+
+
+
+            </div>
+
+        </div>
+    </section><!-- End Team Section -->
+
+
+{% endblock %}
+
+
+
+
+{#    <div class="container">#}
+{#        <div class="col-9">#}
+{##}
+{#            <!-- Start Searchbar Form -->#}
+{#            <form class="searchbar" method="get" action="{% url 'search' %}">#}
+{#                {{ search_form }}#}
+{#                <button>#}
+{#                    Search#}
+{#                </button>#}
+{#                {% csrf_token %}#}
+{#            </form>#}
+{#            <!-- End Searchbar Form -->#}
+{##}
+{#            <!-- Start Pet Photos Post Section -->#}
+{#            {% for therapist in therapists %}#}
+{#                {{ therapist }}#}
+{#            {% endfor %}#}
+{#        </div>#}
+{#    </div>#}

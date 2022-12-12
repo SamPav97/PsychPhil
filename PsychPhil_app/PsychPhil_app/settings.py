@@ -83,6 +83,7 @@ WSGI_APPLICATION = 'PsychPhil_app.wsgi.application'
 
 
 # Database
+# print(os.environ.get('DB_ENGINE'),os.environ.get('DB_NAME'), os.environ.get('DB_USER'),os.environ.get('DB_PASSWORD'))
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 DATABASES = {
     'default': {
@@ -94,7 +95,18 @@ DATABASES = {
         'PORT': os.environ.get('DB_PORT'),
     },
 }
-
+# Cannot make migrations when db credentials are in .env. Credentials dont come thru and are None.
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'psych_phil',
+#         'USER': 'postgres-user',
+#         'PASSWORD': 'password',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
