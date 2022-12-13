@@ -5,7 +5,6 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
 from PsychPhil_app import settings
 from PsychPhil_app.accounts.models import Profile
 
@@ -13,8 +12,6 @@ UserModel = get_user_model()
 
 
 # Make signal every time a post request is made, save a profile with according primary key.
-# In this app saves are only made for new profs. This signal should not activate from signals coming
-# from other apps.
 @receiver(signals.post_save, sender=UserModel)
 def create_employee_on_user_created(instance, created, *args, **kwargs):
     if not created:
@@ -24,7 +21,7 @@ def create_employee_on_user_created(instance, created, *args, **kwargs):
     )
 
 
-# Delete prof when appuser gets deleted
+# Delete prof when AppUser gets deleted.
 @receiver(signals.pre_delete, sender=UserModel)
 def delete_profile_when_account_deleted(instance, **kwargs):
     Profile.objects.get(
@@ -32,6 +29,7 @@ def delete_profile_when_account_deleted(instance, **kwargs):
     ).delete()
 
 
+# Email user upon account creation.
 @receiver(signal=post_save, sender=UserModel)
 def send_email_on_successful_sign_up(instance, created, **kwargs):
     if not created:

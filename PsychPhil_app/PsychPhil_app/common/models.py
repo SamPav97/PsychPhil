@@ -24,8 +24,3 @@ class ClientContact(models.Model):
         blank=False,
         null=False
     )
-
-
-from django.db import models
-
-# Create your models here.

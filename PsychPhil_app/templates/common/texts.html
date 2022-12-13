@@ -19,12 +19,13 @@
                                 {{ text.content }}
                             </p>
                             <div class="social">
-                                <a href="{% url 'delete message' pk=text.pk %}"><button>Delete</button></a>
+                                <a href="{% url 'delete message' pk=text.pk %}">
+                                    <button>Delete</button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-
 
 
             </div>

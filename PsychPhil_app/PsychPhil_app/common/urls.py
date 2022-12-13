@@ -1,5 +1,4 @@
 from django.urls import path
-
 from PsychPhil_app.common.views import IndexViewWithTemplate, ContactView, AboutView, all_therapists, TextUs, \
     texts_view, delete_text
 

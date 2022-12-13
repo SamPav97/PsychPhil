@@ -13,10 +13,9 @@ urlpatterns = [
     path('candidates/', include('PsychPhil_app.therapistCandidate.urls')),
 ]
 
+# Global exception handler:
 handler404 = page_not_found
 handler500 = page_not_found
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-# TODO i should create the view that accepts the file upload and check that it works.

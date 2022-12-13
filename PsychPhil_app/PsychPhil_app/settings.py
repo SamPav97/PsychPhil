@@ -11,10 +11,9 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
 from pathlib import Path
-
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
 import cloudinary
 
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
@@ -25,9 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECREY_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# Exception handler works only with DEBUG = False
 DEBUG = int(os.environ.get('DEBUG', 1))
 
-# '*'  below when debug off
+# '*' below when debug off. If deployed, do deployment domain.
 ALLOWED_HOSTS = []
 
 
@@ -95,7 +95,7 @@ WSGI_APPLICATION = 'PsychPhil_app.wsgi.application'
 #         'PORT': os.environ.get('DB_PORT'),
 #     },
 # }
-# Cannot make migrations when db credentials are in .env. Credentials dont come thru and are None.
+# Cannot make migrations when db credentials are in .env. Credentials don't come through and are None.
 #
 DATABASES = {
     'default': {

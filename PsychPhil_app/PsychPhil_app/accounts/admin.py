@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth import admin as auth_admin, get_user_model
-
-
 from PsychPhil_app.accounts.models import Profile
 
 UserModel = get_user_model()
 
-# When I have add_fieldsets and it finally works but i dunno why.
+
+# Below are some necessary customization for Admin site to work with these models. When I have add_fieldsets it /
+# finally works, but I am not sure why.
+# A total of 5 customizations.
 @admin.register(UserModel)
 class AppUserAdmin(auth_admin.UserAdmin):
     search_fields = ("email__startswith",)

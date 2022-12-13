@@ -24,12 +24,13 @@
                                 {{ therapist.profile.self_summary }}
                             </p>
                             <div class="social">
-                                <a href="{% url 'details user' pk=therapist.pk %}"><button>Go to Profile</button></a>
+                                <a href="{% url 'details user' pk=therapist.pk %}">
+                                    <button>Go to Profile</button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-
 
 
             </div>

@@ -3,23 +3,26 @@
 {% block content %}
 
     <div class="row mt-5 justify-content-center">
-    <h1></h1>
-    <h1 style="align-content: center">Text us your question:</h1>
-          <div class="col-lg-10">
-            <form action="{% url 'text us' pk=request.user.pk%}" method="post" role="form" enctype="multipart/form-data">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                    {{ form.as_p }}
-{#                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>#}
+        <h1></h1>
+        <h1 style="align-content: center">Text us your question:</h1>
+        <div class="col-lg-10">
+            <form action="{% url 'text us' pk=request.user.pk %}" method="post" role="form"
+                  enctype="multipart/form-data">
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ form.as_p }}
+                        {#                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>#}
+                    </div>
+                    {% csrf_token %}
+                    <div class="text-center">
+                        <button type="submit">Send Message</button>
+                    </div>
+
+                    {{ form.errors }}
                 </div>
-                {% csrf_token %}
-              <div class="text-center"><button type="submit">Send Message</button></div>
-
-                {{ form.errors }}
-              </div>
             </form>
-          </div>
-
         </div>
+
+    </div>
 
 {% endblock %}

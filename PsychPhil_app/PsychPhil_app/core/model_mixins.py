@@ -1,3 +1,6 @@
+# Not sure if I need a separate app for these.
+# I need these mixins for the choices in gender and to automate the str method in models.
+
 class StrFromFieldsMixin:
     str_fields = ()
 

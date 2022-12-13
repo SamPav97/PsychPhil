@@ -14,7 +14,7 @@
                 {% endif %}
                 <p>Below you see the therapies that we currently offer:</p>
             </div>
-{#        PAGINATION NEEEDS STYLING !!!!!!!!!!!!!!!!1#}
+            {#        PAGINATION NEEEDS STYLING !!!!!!!!!!!!!!!!1#}
             <div class="pagination">
     <span class="step-links">
         {% if page_obj.has_previous %}
@@ -32,7 +32,7 @@
         {% endif %}
     </span>
             </div>
-{#        END OF PAGINATION#}
+            {#        END OF PAGINATION#}
             {% for therapy in therapies %}
                 <div class="row portfolio-container">
 
@@ -57,12 +57,5 @@
 
     </section><!-- End Portfolio Section -->
 
-    {#    {% for therapy in therapies %}#}
-    {#        {{ therapy.name }}#}
-    {#        <img src="/media/{{ therapy.image }}" alt="post" class="cover">#}
-    {#    {% endfor %}#}
-    {##}
-    {##}
-    {#<button> <a href="{% url 'therapy add' %}">Add Therapy</a> </button>#}
 
 {% endblock %}

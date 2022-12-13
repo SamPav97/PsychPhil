@@ -1,7 +1,6 @@
 from django.contrib.auth import views as auth_views, get_user_model, login
 from django.urls import reverse_lazy
 from django.views import generic as views
-
 from PsychPhil_app.accounts.forms import SignUpForm, EditForm
 from PsychPhil_app.accounts.models import Profile
 
@@ -16,10 +15,9 @@ class SignInView(auth_views.LoginView):
 class SignUpView(views.CreateView):
     template_name = 'accounts/register-page.html'
     form_class = SignUpForm
-
     success_url = reverse_lazy('index')
 
-    # Signs the user in, after successful sign up
+    # Signs the user in, after successful sign up:
     def form_valid(self, form):
         result = super().form_valid(form)
 
@@ -51,8 +49,6 @@ class UserUpdateView(views.UpdateView):
     template_name = 'accounts/profile-edit-page.html'
     form_class = EditForm
     model = Profile
-
-    # fields = ('first_name', 'last_name', 'gender', 'age', 'self_summary', 'image')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

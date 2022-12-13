@@ -3,9 +3,8 @@ from django.contrib.auth import get_user_model
 from django.contrib.auth import mixins as mixins
 from django.shortcuts import render, redirect
 from django.views import generic as views
-
 from PsychPhil_app.accounts.models import Profile
-from PsychPhil_app.common.forms import SearchPhotosTherapists
+from PsychPhil_app.common.forms import SearchTherapists
 from PsychPhil_app.common.models import ClientContact
 from PsychPhil_app.therapies.models import Therapy
 
@@ -31,7 +30,7 @@ class AboutView(views.TemplateView):
 
 
 def all_therapists(request):
-    search_form = SearchPhotosTherapists(request.GET)
+    search_form = SearchTherapists(request.GET)
     search_pattern = None
     if search_form.is_valid():
         search_pattern = search_form.cleaned_data['therapistName']
@@ -39,10 +38,12 @@ def all_therapists(request):
     therapists = UserModel.objects.all()\
         .filter(is_therapist=True)
 
+    # This comprehension below is to get all therapists if search pattern is empty.
     therapist_details = [therapist for therapist in Profile.objects.all() if therapist.user_id in [therapist.pk for therapist in therapists]]
 
     if search_pattern:
         therapist_details = Profile.objects.all().filter(last_name__contains=search_pattern)
+        # Symbol below means += but for queryset... Not sure if the right way to do this.
         therapist_details |= Profile.objects.all().filter(first_name__contains=search_pattern)
 
     context = {
@@ -63,6 +64,7 @@ class TextUs(mixins.LoginRequiredMixin, views.CreateView):
     fields = ('subject', 'content')
     success_url = 'contact'
 
+    # To have user pk instead of making user provide email.
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.user = self.request.user
@@ -81,6 +83,7 @@ def texts_view(request):
     return render(request, 'common/texts.html', context,)
 
 
+# Since this does not return a template, not sure if it should not be in utils file.
 def delete_text(request, pk):
     text = ClientContact.objects.all().filter(pk=pk).get()
 

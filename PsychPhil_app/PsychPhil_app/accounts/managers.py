@@ -2,9 +2,9 @@ from django.contrib.auth import base_user
 from django.contrib.auth.hashers import make_password
 
 
-# I add the AppUserManage because I am building my own user class and hence it is necessary.
+# I add the AppUserManage because I am building my own user class and hence it is necessary to replace the username.
 # Here I overwrite the username because I do not need it since I have email.
-# This code was copied from the built-in user where objects = users manager
+# This code was copied from the built-in user where objects = users manager.
 class AppUserManager(base_user.BaseUserManager):
     use_in_migrations = True
 

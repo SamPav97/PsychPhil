@@ -1,14 +1,13 @@
 from django.contrib.auth import forms as auth_forms, get_user_model
 from django import forms
-
 from PsychPhil_app.accounts.models import Profile, Gender
 
 UserModel = get_user_model()
 
 
-# I no longer really need this form as prof n user r connected with a signal. and I dont ask for first name etc on /
-# on registration anyway
-# Through the form I connect the profile and the user.
+# I no longer really need this form as profile and user are connected with a signal. /
+# and I don't ask for first name etc. on registration.
+# I am keeping the form in case the minimum 5 forms requirement means this kind of forms.
 class SignUpForm(auth_forms.UserCreationForm):
     first_name = forms.CharField(
         required=False

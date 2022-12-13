@@ -10,11 +10,11 @@
                     <div class="portfolio-details-slider swiper">
                         <div class="swiper-wrapper align-items-center">
                             {% if object.profile.image.url %}
-                            <div>
-                                <img src="{{ object.profile.image.url }}" alt="Profile Picture">
-                            </div>
+                                <div>
+                                    <img src="{{ object.profile.image.url }}" alt="Profile Picture">
+                                </div>
                             {% else %}
-                            <div> Please upload a profile picture.</div>
+                                <div> Please upload a profile picture.</div>
                             {% endif %}
                         </div>
                         <div class="swiper-pagination"></div>
@@ -33,12 +33,12 @@
                                 </a></button>
                             {% else %}
                                 {% if user.is_authenticarted %}
-                                <a href="#">
-                                    <button>Contact</button>
-                                </a>
-                                    {% else %}
+                                    <a href="#">
+                                        <button>Contact</button>
+                                    </a>
+                                {% else %}
                                     <p><a href="{% url 'login user' %}">Log in</a> to contact therapist.</p>
-                                    {% endif %}
+                                {% endif %}
                             {% endif %}
 
                         </h3>
@@ -46,12 +46,12 @@
                             {#                            If contact form dont work i can just have contact details here#}
                             <li><strong>Email</strong>: {{ object.email }}</li>
                             <li><strong>Gender</strong>: {{ object.profile.gender }}</li>
-                        {% if is_therapist %}
-                            <li><strong>Schools Membership</strong>:
-                                {% for therapy in therapies_member_of %}{{ therapy.name }}; {% endfor %}</li>
-                        {% else %}
-                            <li><strong>Stauts</strong>: Client
-                        {% endif %}
+                            {% if is_therapist %}
+                                <li><strong>Schools Membership</strong>:
+                                    {% for therapy in therapies_member_of %}{{ therapy.name }}; {% endfor %}</li>
+                            {% else %}
+                                <li><strong>Stauts</strong>: Client
+                            {% endif %}
                         </ul>
                     </div>
 

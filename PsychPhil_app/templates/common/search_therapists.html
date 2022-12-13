@@ -28,12 +28,13 @@
                                 {{ therapist.profile.self_summary }}
                             </p>
                             <div class="social">
-                                <a href="{% url 'details user' pk=therapist.user_id %}"><button>Go to Profile</button></a>
+                                <a href="{% url 'details user' pk=therapist.user_id %}">
+                                    <button>Go to Profile</button>
+                                </a>
                             </div>
                         </div>
                     </div>
                 {% endfor %}
-
 
 
             </div>
@@ -45,24 +46,3 @@
 {% endblock %}
 
 
-
-
-{#    <div class="container">#}
-{#        <div class="col-9">#}
-{##}
-{#            <!-- Start Searchbar Form -->#}
-{#            <form class="searchbar" method="get" action="{% url 'search' %}">#}
-{#                {{ search_form }}#}
-{#                <button>#}
-{#                    Search#}
-{#                </button>#}
-{#                {% csrf_token %}#}
-{#            </form>#}
-{#            <!-- End Searchbar Form -->#}
-{##}
-{#            <!-- Start Pet Photos Post Section -->#}
-{#            {% for therapist in therapists %}#}
-{#                {{ therapist }}#}
-{#            {% endfor %}#}
-{#        </div>#}
-{#    </div>#}

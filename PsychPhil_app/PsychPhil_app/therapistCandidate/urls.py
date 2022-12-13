@@ -1,5 +1,4 @@
 from django.urls import path
-
 from PsychPhil_app.therapistCandidate.views import CandidateView, acceptance_view, RefuteCandidate, \
     accept_candidate
 

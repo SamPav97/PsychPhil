@@ -1,21 +1,21 @@
 from enum import Enum
-
 from django.contrib.auth import models as auth_models
 from django.db import models
 from django.core import validators
 from cloudinary import models as cloudinary_models
-
 from PsychPhil_app.accounts.managers import AppUserManager
 from PsychPhil_app.core.model_mixins import ChoicesEnumMixin
 from PsychPhil_app.core.validators import validate_only_letters
 
 
+# Drop-down for this attribute of model.
 class Gender(ChoicesEnumMixin, Enum):
     male = 'Male'
     female = 'Female'
     Other = 'Other'
 
 
+# The two models below are connected by a signal.
 class AppUser(auth_models.AbstractBaseUser, auth_models.PermissionsMixin):
     email = models.EmailField(
         unique=True,
@@ -68,7 +68,7 @@ class Profile(models.Model):
             validate_only_letters,
         )
     )
-# KINDA DONE I gotta make sure that these newly added are reflected in form and in edit profile. they should show up only if therapist and (optimally) be compulsary
+
     self_summary = models.TextField(
         max_length=MAX_LEN_SUMMARY,
         blank=True,
@@ -103,41 +103,3 @@ class Profile(models.Model):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
-
-# class AppUser(auth_models.AbstractUser):
-#     MIN_LEN_FIRST_NAME = 2
-#     MAX_LEN_FIRST_NAME = 30
-#     MIN_LEN_LAST_NAME = 2
-#     MAX_LEN_LAST_NAME = 30
-#
-#     first_name = models.CharField(
-#         max_length=MAX_LEN_FIRST_NAME,
-#         blank=True,
-#         validators=(
-#             validators.MinLengthValidator(MIN_LEN_FIRST_NAME),
-#             validate_only_letters,
-#         )
-#     )
-#
-#     last_name = models.CharField(
-#         max_length=MAX_LEN_LAST_NAME,
-#         blank=True,
-#         validators=(
-#             validators.MinLengthValidator(MIN_LEN_LAST_NAME),
-#             validate_only_letters,
-#         )
-#     )
-#
-#     email = models.EmailField(
-#         unique=True
-#     )
-#
-#     gender = models.CharField(
-#         choices=Gender.choices(),
-#         max_length=Gender.max_len(),
-#         blank=True,
-#     )
-#
-#     is_therapist = models.BooleanField(
-#         default=False,
-#     )

@@ -1,47 +1,54 @@
 {% extends 'base/base.html' %}
 {% load static %}
 {% block content %}
-<!-- ======= About Section ======= -->
+    <!-- ======= About Section ======= -->
     <section id="about" class="about">
-      <div class="container">
+        <div class="container">
 
-        <div class="row">
-          <div class="col-lg-6">
-            <img src="{% static 'images1/clinicBuilding.jpg' %}" class="img-fluid" alt="Clinic Building">
-          </div>
-          <div class="col-lg-6 pt-4 pt-lg-0">
-            <h3>About Us</h3>
-            <p>
-              Located at the heart of Vienna, the city of psychoanalysis, PsychPhil offers you the opportunity to connect
-                with therapists specializing in the so called "Depth Psychology" schools. Freudian, Jungian, Lacanian therapists
-                are all to be found at our clinic. We aim for the best and most effective therapies for tackling neurosis and
-                do not take the 'quick fixes' of the superficial cognitive therapies as long-term solutions. Get in touch with
-                us to find out more.
-            </p>
-            <ul>
-              <li><i class="bx bx-check-double"></i> Specializing in 'Deep Therapies' for long-term problem resolution.</li>
-              <li><i class="bx bx-check-double"></i> No reliance on quick-fixes.</li>
-            </ul>
-            <div class="row icon-boxes">
-              <div class="col-md-6">
-                <i class="bx bxs-brain"></i>
-                <h4>Read More</h4>
-                <p>More about "Depth Psychology" can be found <a href="https://en.wikipedia.org/wiki/Depth_psychology" target="_blank">Here</a></p>
-              </div>
-              <div class="col-md-6 mt-4 mt-md-0">
-                <i class="bx bxs-school"></i>
-                <h4>Therapies we currently offer:</h4>
-                <ul>
-                    {% for therapy in therapies %}
-                    <li><a href="{% url 'details therapy' pk=therapy.pk %}">{{ therapy.name }}</a></li>
-                    {% endfor %}
-                </ul>
-              </div>
+            <div class="row">
+                <div class="col-lg-6">
+                    <img src="{% static 'images1/clinicBuilding.png' %}" class="img-fluid" alt="Clinic Building">
+                </div>
+                <div class="col-lg-6 pt-4 pt-lg-0">
+                    <h3>About Us</h3>
+                    <p>
+                        Located at the heart of Vienna, the city of psychoanalysis, PsychPhil offers you the opportunity
+                        to connect
+                        with therapists specializing in the so called "Depth Psychology" schools. Freudian, Jungian,
+                        Lacanian therapists
+                        are all to be found at our clinic. We aim for the best and most effective therapies for tackling
+                        neurosis and
+                        do not take the 'quick fixes' of the superficial cognitive therapies as long-term solutions. Get
+                        in touch with
+                        us to find out more.
+                    </p>
+                    <ul>
+                        <li><i class="bx bx-check-double"></i> Specializing in 'Deep Therapies' for long-term problem
+                            resolution.
+                        </li>
+                        <li><i class="bx bx-check-double"></i> No reliance on quick-fixes.</li>
+                    </ul>
+                    <div class="row icon-boxes">
+                        <div class="col-md-6">
+                            <i class="bx bxs-brain"></i>
+                            <h4>Read More</h4>
+                            <p>More about "Depth Psychology" can be found <a
+                                    href="https://en.wikipedia.org/wiki/Depth_psychology" target="_blank">Here</a></p>
+                        </div>
+                        <div class="col-md-6 mt-4 mt-md-0">
+                            <i class="bx bxs-school"></i>
+                            <h4>Therapies we currently offer:</h4>
+                            <ul>
+                                {% for therapy in therapies %}
+                                    <li><a href="{% url 'details therapy' pk=therapy.pk %}">{{ therapy.name }}</a></li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-        </div>
 
-      </div>
+        </div>
     </section><!-- End About Section -->
 
 {% endblock %}

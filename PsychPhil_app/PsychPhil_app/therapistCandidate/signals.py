@@ -4,14 +4,13 @@ from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.template.loader import render_to_string
 from django.utils.html import strip_tags
-
 from PsychPhil_app import settings
-
 from PsychPhil_app.therapistCandidate.models import TherapistCand
 
 UserModel = get_user_model()
 
 
+# Send email when a user applies to become therapist.
 @receiver(signal=post_save, sender=TherapistCand)
 def send_email_on_successful_application_for_therapist(instance, created, **kwargs):
 

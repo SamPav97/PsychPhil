@@ -1,3 +1,4 @@
 from django.contrib import admin
 
-# Register your models here.
+# I have not registered the model for admin because it does not make sense
+# that admin uses the contact us function.

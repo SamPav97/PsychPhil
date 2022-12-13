@@ -1,49 +1,51 @@
 {% extends 'base/base.html' %}
 {% block content %}
-<!-- ======= Contact Section ======= -->
+    <!-- ======= Contact Section ======= -->
     <section id="contact" class="contact section-bg">
-      <div class="container">
+        <div class="container">
 
-        <div class="section-title">
-          <h2>Contact</h2>
-          <p>Feel free to contact us with any queries you might have:</p>
-        </div>
-
-        <div class="row mt-5 justify-content-center">
-
-          <div class="col-lg-10">
-
-            <div class="info-wrap">
-              <div class="row">
-                <div class="col-lg-4 info">
-                  <i class="bi bi-geo-alt"></i>
-                  <h4>Location:</h4>
-                  <p>Praterstraße<br>1020, Vienna, Austria</p>
-                </div>
-
-                <div class="col-lg-4 info mt-4 mt-lg-0">
-                  <i class="bi bi-envelope"></i>
-                  <h4>Email:</h4>
-                  <p>psychphil@clinic.com<br>support@clinic.com</p>
-                </div>
-
-                <div class="col-lg-4 info mt-4 mt-lg-0">
-                  <i class="bi bi-phone"></i>
-                  <h4>Call:</h4>
-                  <p>+43 898 456 474<br>02 666 523</p>
-                </div>
-              </div>
+            <div class="section-title">
+                <h2>Contact</h2>
+                <p>Feel free to contact us with any queries you might have:</p>
             </div>
-              {% if user.is_authenticated %}
-                <a href="{% url 'text us' pk=request.user.pk    %}"><button>Text Us</button></a>
-                  {% else %}
-                  <a href="{% url 'login user' %}">Log in</a> to contact us on the website.
-              {% endif %}
-          </div>
+
+            <div class="row mt-5 justify-content-center">
+
+                <div class="col-lg-10">
+
+                    <div class="info-wrap">
+                        <div class="row">
+                            <div class="col-lg-4 info">
+                                <i class="bi bi-geo-alt"></i>
+                                <h4>Location:</h4>
+                                <p>Praterstraße<br>1020, Vienna, Austria</p>
+                            </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                                <i class="bi bi-envelope"></i>
+                                <h4>Email:</h4>
+                                <p>psychphil@clinic.com<br>support@clinic.com</p>
+                            </div>
+
+                            <div class="col-lg-4 info mt-4 mt-lg-0">
+                                <i class="bi bi-phone"></i>
+                                <h4>Call:</h4>
+                                <p>+43 898 456 474<br>02 666 523</p>
+                            </div>
+                        </div>
+                    </div>
+                    {% if user.is_authenticated %}
+                        <a href="{% url 'text us' pk=request.user.pk %}">
+                            <button>Text Us</button>
+                        </a>
+                    {% else %}
+                        <a href="{% url 'login user' %}">Log in</a> to contact us on the website.
+                    {% endif %}
+                </div>
+
+            </div>
+
 
         </div>
-
-
-      </div>
     </section><!-- End Contact Section -->
 {% endblock %}

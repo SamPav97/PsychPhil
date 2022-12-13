@@ -1,13 +1,13 @@
 from django.contrib.auth import get_user_model
 from cloudinary import models as cloudinary_models
 from django.db import models
-
 from PsychPhil_app.accounts.models import AppUser
 from PsychPhil_app.core.model_mixins import StrFromFieldsMixin
 
 UserModel = get_user_model()
 
 
+# I use this mixin to create the string method of the class.
 class Therapy(StrFromFieldsMixin, models.Model):
     str_fields = ('id', 'name')
     NAME_MAX = 200

@@ -1,7 +1,6 @@
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic as views
-
 from PsychPhil_app.therapies.forms import CreateTherapy, EditTherapy
 from PsychPhil_app.therapies.models import Therapy
 from PsychPhil_app.therapistCandidate.mixins import TherapistRequiredMixin
@@ -19,7 +18,7 @@ class AddTherapyView(TherapistRequiredMixin, views.CreateView):
     form_class = CreateTherapy
     success_url = reverse_lazy('therapies')
 
-    # overwrite form to save current user as creator user.
+    # Overwrite form to save current user as creator user.
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(AddTherapyView, self).form_valid(form)
@@ -49,20 +48,17 @@ class TherapyDetails(views.DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
 
-        #to be owner u gotta have creator in model for theraepy
-
-        #get in here is member because u need it for te button join or leave. it might be best to do a therapy style in user and do a relation there insted of many to many in therapy.
-
-        #get current therapy
+        # Get current therapy
         therapy = Therapy.objects.all() \
             .filter(pk=self.object.pk) \
             .get()
 
-        # Check if user is alrdy member of this therapy
+        # Check if user is already member of this therapy/school.
         context['is_member_of_therapy'] = self.request.user in therapy.therapists.all()
         context['is_owner'] = self.request.user == therapy.user
 
-        #BELOW shows you the user is member of which therpaies. we did this thru a related name in the models. use this when indicating which schools user (current therapist) is member of
+        # Below shows which therapies user is member of.
+        # This was done through a related name in the models.
         if self.request.user.is_authenticated:
             context['therapies_member_of'] = self.request.user.therapists.all()
             print(context['therapies_member_of'])
@@ -90,19 +86,8 @@ class ShowTherapistsView(views.ListView):
         return context
 
 
-    # def get_queryset(self, *args, **kwargs):
-    #     therapy = Therapy.objects.all() \
-    #         .filter(pk=self.kwargs['pk']) \
-    #         .get()
-    #     qs = super(Therapy, self).get_queryset(*args, **kwargs)
-    #
-    #     return qs
-
-    # print(queryset)
-
-    # DONE fix the queryset issue... what is query set equal to. overwrite it somehow so u get only for speciffic therapy the things
-
-
+# Not sure if those should be in a 'utils' file because I use them
+# as functions but not as views:
 def join_therapy(request, pk):
     therapy = Therapy.objects.all()\
                .filter(pk=pk) \
@@ -121,8 +106,3 @@ def leave_therapy(request, pk):
     therapy.therapists.remove(request.user)
 
     return redirect('details therapy', pk=pk)
-#okay you need to make the join button disappear if alrdy joined and offer leave instead./
-#You need to make sure one therapist cannot join other therapies (idk how u gonn do that) maybe at a thing to user that also changes when a therapy is joined
-#display all therapists from given therapy and link them to user prof details.
-
-# DONE finish details view by adding edit n delete buttons and showw all therapists.

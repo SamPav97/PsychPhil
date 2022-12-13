@@ -1,5 +1,4 @@
 from django.contrib import admin
-
 from PsychPhil_app.therapies.models import Therapy
 
 

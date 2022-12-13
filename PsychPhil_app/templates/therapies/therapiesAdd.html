@@ -3,48 +3,43 @@
 {% block content %}
 
     <div class="row mt-5 justify-content-center">
-    <h1></h1>
-    <h1 style="align-content: center">Add a Therapy:</h1>
-          <div class="col-lg-10">
+        <h1></h1>
+        <h1 style="align-content: center">Add a Therapy:</h1>
+        <div class="col-lg-10">
             <form action="{% url 'therapy add' %}" method="post" role="form" enctype="multipart/form-data">
-              <div class="row">
-                <div class="col-md-6 form-group">
-                    {{ form.name|placeholder:'Therapy Name' }}
-{#                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>#}
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        {{ form.name|placeholder:'Therapy Name' }}
+                        {#                  <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>#}
+                    </div>
+                    <div class="form-group mt-3">
+                        {{ form.founder|placeholder:'Therapy/School Founder' }}
+                        {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
+                    </div>
+                    <div class="form-group mt-3">
+                        {{ form.summary|placeholder:'One-sentence summary' }}
+                        {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
+                    </div>
+                    <div class="form-group mt-3">
+                        {{ form.url|placeholder:'More information URL' }}
+                        {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
+                    </div>
+                    <div class="form-group mt-3">
+                        {{ form.description|placeholder:'Describe the therapy' }}
+                        {#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
+                    </div>
+
+                    Image: {{ form.image }}
+                    {% csrf_token %}
+                    <div class="text-center">
+                        <button type="submit">Create</button>
+                    </div>
+
+                    {{ form.errors }}
                 </div>
-              <div class="form-group mt-3">
-                  {{ form.founder|placeholder:'Therapy/School Founder' }}
-{#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
-              </div>
-                <div class="form-group mt-3">
-                  {{ form.summary|placeholder:'One-sentence summary' }}
-{#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
-              </div>
-                <div class="form-group mt-3">
-                  {{ form.url|placeholder:'More information URL' }}
-{#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
-              </div>
-              <div class="form-group mt-3">
-                  {{ form.description|placeholder:'Describe the therapy' }}
-{#                <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>#}
-              </div>
-
-                Image: {{ form.image }}
-                {% csrf_token %}
-              <div class="text-center"><button type="submit">Create</button></div>
-
-                {{ form.errors }}
-              </div>
             </form>
-          </div>
-
         </div>
 
-{#Add Therapy#}
-{#    <form method="post" action="{% url 'therapy add' %}" enctype="multipart/form-data">#}
-{#    {{ form }}#}
-{#        <button>Submit</button>#}
-{#    {% csrf_token %}#}
-{#    </form>#}
+    </div>
 
 {% endblock %}

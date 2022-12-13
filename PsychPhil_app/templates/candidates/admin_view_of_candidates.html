@@ -25,7 +25,7 @@
                             </h4>
 
                             <p>{{ candidate.motivation }}</p>
-{#                            Note cloudinary download is not working for free users OR it does but you need to allow it#}
+                            {#                            Note cloudinary download is not working for free users OR it does but you need to allow it#}
                             <a href="{{ candidate.cv.url }}">Download CV</a>
                         </div>
                     </div>
@@ -35,28 +35,5 @@
 
         </div>
     </section><!-- End Services Section -->
-
-    {#    <!-- Start Register Section -->#}
-    {#    <div class="login-register-div">#}
-    {#        <div class="login-register-box">#}
-    {#            <h1>Candidates</h1>#}
-    {##}
-    {#            <!-- Start Register Form -->#}
-    {#            {% for candidate in candidates %}#}
-    {#                {{ candidate.user }}#}
-    {#\#}
-    {#                <a href="{% url 'accept candidate' pk=candidate.pk %}">#}
-    {#                    Accept#}
-    {#                </a>#}
-    {##}
-    {#                <a href="{% url 'refute candidate' pk=candidate.pk %}">#}
-    {#                    <img class="bin-img" src="{% static 'images/icon-remove-22.jpg' %}" alt="bin button">#}
-    {#                </a>#}
-    {#            {% endfor %}#}
-    {#            <!-- End Register Form -->#}
-    {##}
-    {#        </div>#}
-    {#    </div>#}
-    {#    <!-- End Register Section -->#}
 
 {% endblock %}
