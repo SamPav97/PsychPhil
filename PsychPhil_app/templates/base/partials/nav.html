@@ -1,7 +1,7 @@
 {% load static %}
 
 <nav id="navbar" class="navbar order-last order-lg-0">
-    <ul>{% if request.user.is_staff %}
+    <ul>{% if request.user.is_superuser %}
         <li><a class="nav-link scrollto active" href="{% url 'see candidates' %}">Candidates</a></li>
         <li><a class="nav-link scrollto active" href="{% url 'texts' %}">Messages</a></li>
     {% endif %}
@@ -12,9 +12,11 @@
         <li><a class="nav-link scrollto" href="{% url 'about' %}">About</a></li>
         <li><a class="nav-link scrollto" href="{% url 'therapies' %}">Therapies</a></li>
         <li><a class="nav-link scrollto" href="{% url 'contact' %}">Contact</a></li>
+        {% if request.user.is_authenticated and not request.user.is_therapist %}
+            <li><a class="nav-link scrollto " href="{% url 'candidate' %}">Careers</a></li>
+        {% endif %}
         {% if request.user.is_authenticated %}
             <li><a class="nav-link scrollto " href="{% url 'details user' pk=request.user.pk %}">Profile</a></li>
-            <li><a class="nav-link scrollto " href="{% url 'candidate' %}">Careers</a></li>
             <li><a class="nav-link scrollto " href="{% url 'logout user' %}">Log out</a></li>
         {% else %}
             <li><a class="nav-link scrollto" href="{% url 'login user' %}">Log in</a></li>

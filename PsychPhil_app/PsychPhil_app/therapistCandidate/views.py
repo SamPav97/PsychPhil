@@ -1,6 +1,7 @@
 from django.contrib.admin.views.decorators import staff_member_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin, AccessMixin
+from django.contrib.auth.models import Group
 from django.core.mail import send_mail
 from django.shortcuts import render, redirect
 from django.template.loader import render_to_string
@@ -75,7 +76,11 @@ def accept_candidate(request, pk):
         .filter(pk=candidate.user_id) \
         .get()
     make_therapist.is_therapist = True
+    make_therapist.is_staff = True
     make_therapist.save()
+
+    admin_group = Group.objects.first()
+    admin_group.user_set.add(make_therapist)
 
     user = UserModel.objects.all() \
         .filter(pk=candidate.user_id) \

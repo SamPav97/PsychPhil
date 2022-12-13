@@ -25,6 +25,8 @@
                             </h4>
 
                             <p>{{ candidate.motivation }}</p>
+{#                            Note cloudinary download is not working for free users OR it does but you need to allow it#}
+                            <a href="{{ candidate.cv.url }}">Download CV</a>
                         </div>
                     </div>
                 {% endfor %}

@@ -32,9 +32,13 @@
                                     Delete
                                 </a></button>
                             {% else %}
+                                {% if user.is_authenticarted %}
                                 <a href="#">
                                     <button>Contact</button>
                                 </a>
+                                    {% else %}
+                                    <p><a href="{% url 'login user' %}">Log in</a> to contact therapist.</p>
+                                    {% endif %}
                             {% endif %}
 
                         </h3>

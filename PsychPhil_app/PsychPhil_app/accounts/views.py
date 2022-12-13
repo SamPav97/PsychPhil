@@ -39,7 +39,7 @@ class UserDetailsView(views.DetailView):
         context = super().get_context_data(**kwargs)
 
         if self.request.user.is_authenticated:
-            context['therapies_member_of'] = self.request.user.therapists.all()
+            context['therapies_member_of'] = self.object.therapists.all()
 
         context['is_owner'] = self.request.user == self.object
         context['is_therapist'] = self.object.is_therapist
