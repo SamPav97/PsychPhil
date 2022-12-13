@@ -1,0 +1,67 @@
+{% extends 'base/base.html' %}
+{% load static %}
+{% block content %}
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container">
+
+            <div class="row gy-4">
+
+                <div class="col-lg-8">
+                    <div class="portfolio-details-slider swiper">
+                        <div class="swiper-wrapper align-items-center">
+
+                            <div>
+                                <img src="{{ object.image.url }}" alt="Therapy Image">
+                            </div>
+                        </div>
+                        <div class="swiper-pagination"></div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="portfolio-info">
+                        <h3>{{ object.name }}
+                            {% if is_owner %}
+                                <button><a href="{% url 'edit therapy' object.pk %}">
+                                    Edit
+                                </a></button>
+                                <button><a href="{% url 'delete therapy' object.pk %}">
+                                    Delete
+                                </a></button>
+                            {% endif %}
+
+                            {% if is_therapist and is_member_of_therapy %}
+                                <form method="post"
+                                      action="{% url 'therapist leave' pk=object.pk %}">{% csrf_token %}
+                                    <button type="submit">Leave School</button>
+                                </form>
+                            {% elif is_therapist and not is_member_of_therapy %}
+                                <form method="post"
+                                      action="{% url 'therapist join' pk=object.pk %}">{% csrf_token %}
+                                    <button type="submit">Join School</button>
+                                </form>
+                            {% endif %}
+                        </h3>
+                        <ul>
+                            <li><strong>Summary</strong>: {{ object.summary }}</li>
+                            <li><strong>Founder</strong>: {{ object.founder }}</li>
+                            <li><strong>More Information</strong>: <a href="{{ object.url }}" target="_blank">Here</a>
+                            </li>
+                            <li><strong>See Practicing Therapists</strong>: <a
+                                    href="{% url 'show therapists' pk=object.pk %}">Here</a></li>
+                        </ul>
+                    </div>
+                    <div class="portfolio-description">
+                        <h2>More about this school of thought:</h2>
+                        <p>
+                            {{ object.description }}
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </section><!-- End Portfolio Details Section -->
+
+{% endblock %}
