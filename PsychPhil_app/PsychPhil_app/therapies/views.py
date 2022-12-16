@@ -61,10 +61,8 @@ class TherapyDetails(views.DetailView):
         # This was done through a related name in the models.
         if self.request.user.is_authenticated:
             context['therapies_member_of'] = self.request.user.therapists.all()
-            print(context['therapies_member_of'])
         if self.request.user.is_authenticated:
             context['is_therapist'] = self.request.user.is_therapist
-
         return context
 
 
