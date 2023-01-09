@@ -99,10 +99,10 @@ WSGI_APPLICATION = 'PsychPhil_app.wsgi.application'
 #
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'psych_phil',
-        'USER': 'postgres-user',
-        'PASSWORD': 'password',
+        'ENGINE': 'xxxxxxxx',
+        'NAME': 'xxxxxx',
+        'USER': 'xxxxxx',
+        'PASSWORD': 'xxxxx',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -150,9 +150,9 @@ STATICFILES_DIRS = (
 MEDIA_URL = '/media/'
 
 cloudinary.config(
-    cloud_name="dmvvj6aea",
-    api_key="961724921271865",
-    api_secret="2m5mIyiqdSQvJHqR6lPbeiczuk4",
+    cloud_name="xxxxxxx",
+    api_key="xxxxxxx",
+    api_secret="xxxxxxxx",
     secure=True
 )
 
